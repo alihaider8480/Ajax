@@ -1,0 +1,5 @@
+ajax is asynchronus
+reduce network load
+use XMLHttpRequest object = nick XHR object.
+vanila javascript means bina kisi library ko import kia isko hum use karen ga usko hum ya khata hai
+ajax ka throw hum json , html , http , txt sab sa mangwa sakta hai
