@@ -55,3 +55,32 @@ function getDataFromLiveApiJson()
     }     
     var2.send();
 }
+
+// post method add data from live json api  // http://dummy.restapiexample.com/employees
+function AddDataFromLiveApiJson()
+{
+    let var3 = new XMLHttpRequest();
+
+    var3.open('POST','http://dummy.restapiexample.com/api/v1/create',true);
+
+    var3.onprogress = function()
+    {
+        console.log('InProgress...');
+    }
+
+    var3.onload = function(){
+        console.log('Done...');
+        if(this.status === 200)
+        {
+            console.log('Response Data... : '+this.response);
+        }else{
+            window.alert('Error');
+
+        }
+
+    }
+    var3.getResponseHeader('Content-type','application/json');
+
+    params = '{"name":"jhony8480","salary":"123","age":"23"}';
+    var3.send(params);
+}
