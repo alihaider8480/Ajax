@@ -90,6 +90,7 @@ function FetchAllDataFromLiveApiJson()
     console.log('Called FetchAllDataFromLiveApiJson Method...')
     let fetchAllData = new XMLHttpRequest();
 
+    // this api have 50 plus records 
     fetchAllData.open('GET','http://dummy.restapiexample.com/api/v1/employees',true);
 
     fetchAllData.onprogress = function()
@@ -102,8 +103,47 @@ function FetchAllDataFromLiveApiJson()
         if(this.status === 200)
         {
             console.log('printing all employees');
+
+            // here we parse object to json object and that object we can print
             let list = JSON.parse(this.responseText);
             console.log(list);
+        }else{
+            console.log('Error Occured During FetchAllDataFromLiveApiJson Method Called try it more time if too many error show');
+        }
+    }
+    fetchAllData.send();
+
+    console.log('All Records Fetch...!!');
+}
+
+function printDataUiFromLiveApiJson(){
+    console.log('Called FetchAllDataFromLiveApiJson Method...')
+    let fetchAllData = new XMLHttpRequest();
+
+    // this api have 50 plus records 
+    fetchAllData.open('GET','http://dummy.restapiexample.com/api/v1/employees',true);
+
+    fetchAllData.onprogress = function()
+    {
+        console.log('FetchAllDataFromLiveApiJson method in progress....');
+    }
+
+    fetchAllData.onload = function()
+    {
+        if(this.status === 200)
+        {
+            console.log('printing all employees');
+
+            // here we parse object to json object and that object we can print
+            let li = document.getElementById('show');
+            let listOfValues = JSON.parse(this.responseText);
+            str ="";
+         
+            for(key in listOfValues){
+                console.log(listOfValues[key].id);
+                str += `<li>${listOfValues[key].employee_name}</li>`;
+            }
+            li.innerHTML = str;
         }else{
             console.log('Error Occured During FetchAllDataFromLiveApiJson Method Called try it more time if too many error show');
         }
