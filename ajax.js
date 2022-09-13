@@ -61,16 +61,16 @@ function AddDataFromLiveApiJson()
 {
     let var3 = new XMLHttpRequest();
 
-    var3.open('POST','http://dummy.restapiexample.com/api/v1/create',true);
+    var3.open('POST','http://dummy.restapiexample.com/api/v1/create',true);    // true means we did call this api and simultaniously it call another below process
 
     var3.onprogress = function()
     {
         console.log('InProgress...');
     }
 
-    var3.onload = function(){
+    var3.onload = function(){       // onload means everything is loaded and done then it will be execute
         console.log('Done...');
-        if(this.status === 200)
+        if(this.status === 200)     // all done  then we can check the status of request
         {
             console.log('Response Data... : '+this.response);
         }else{
@@ -79,8 +79,36 @@ function AddDataFromLiveApiJson()
         }
 
     }
-    var3.getResponseHeader('Content-type','application/json');
+    var3.getResponseHeader('Content-type','application/json');  // here we set the content type and headers of request it should be mendatory
 
-    params = '{"name":"jhony8480","salary":"123","age":"23"}';
-    var3.send(params);
+    params = '{"name":"jhony8480","salary":"123","age":"23"}';     // here we set variables in object and set in a object
+    var3.send(params);                                          // HERE WE  send the object of data
+}
+
+function FetchAllDataFromLiveApiJson()
+{
+    console.log('Called FetchAllDataFromLiveApiJson Method...')
+    let fetchAllData = new XMLHttpRequest();
+
+    fetchAllData.open('GET','http://dummy.restapiexample.com/api/v1/employees',true);
+
+    fetchAllData.onprogress = function()
+    {
+        console.log('FetchAllDataFromLiveApiJson method in progress....');
+    }
+
+    fetchAllData.onload = function()
+    {
+        if(this.status === 200)
+        {
+            console.log('printing all employees');
+            let list = JSON.parse(this.responseText);
+            console.log(list);
+        }else{
+            console.log('Error Occured During FetchAllDataFromLiveApiJson Method Called try it more time if too many error show');
+        }
+    }
+    fetchAllData.send();
+
+    console.log('All Records Fetch...!!');
 }
